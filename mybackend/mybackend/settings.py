@@ -81,10 +81,23 @@ WSGI_APPLICATION = 'mybackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': os.getenv('DB_NAME', 'mydatabase'),
+        'USER': os.getenv('DB_USER', 'admin'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Reaper100102!'),
+        'HOST': os.getenv('DB_HOST', 'mydatabase.c3oaikac2rh2.us-east-2.rds.amazonaws.com'),
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',  # Make sure this driver is installed
+        },
     }
 }
 
